@@ -79,7 +79,7 @@ jobs:
         env:
           super_secret: ${{ secrets.SECRET_KEY }}
         run: |
-          PLATFORMIO_BUILD_FLAGS='-DVERSION=\"v${{ steps.version.outputs.version }}\" -DDBG=0' pio run -d SmartEVSE-3/
+          PLATFORMIO_BUILD_FLAGS='-DVERSION=\"v${{ steps.version.outputs.version }}\" -DDBG=0 -DGITHUB_PUBLIC_TOKEN="$public_token"' pio run -d SmartEVSE-3/
           cd sign_firmware
           make sign
           # Create a temporary file
@@ -107,7 +107,7 @@ jobs:
         env:
           super_secret: ${{ secrets.SECRET_KEY }}
         run: |
-          PLATFORMIO_BUILD_FLAGS='-DVERSION=\"v${{ steps.version.outputs.version }}\" -DDBG=1' pio run -d SmartEVSE-3/
+          PLATFORMIO_BUILD_FLAGS='-DVERSION=\"v${{ steps.version.outputs.version }}\" -DDBG=1 -DGITHUB_PUBLIC_TOKEN="$public_token"' pio run -d SmartEVSE-3/
           cd sign_firmware
           make sign
           # Create a temporary file
