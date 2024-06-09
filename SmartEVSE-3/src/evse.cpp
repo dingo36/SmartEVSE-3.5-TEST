@@ -3748,23 +3748,6 @@ bool getLatestVersion(String owner_repo, String asset_name, char *version, char 
     }
     _http.addHeader("User-Agent", "SmartEVSE-v3");
     _http.addHeader("Accept", "application/vnd.github+json");
-
-    //make public token a string
-
-// this converts to string
-#define STR_(X) #X
-// this makes sure the argument is expanded before converting to string
-#define STR(X) STR_(X)
-
-//we need some macro magic to check if GITHUB_TOKEN is defined or empty
-#define DO_EXPAND(VAL) VAL ##1
-#define EXPAND(VAL) DO_EXPAND(VAL)
-#define Bearify(x) "Bearer "  STR(x)
-
-    //public token for dingo35 repo to have higher rate limiting; non expiring
-#if defined(GITHUB_PUBLIC_TOKEN) && (EXPAND(GITHUB_PUBLIC_TOKEN) != 1)
-    _http.addHeader("Authorization", Bearify(GITHUB_PUBLIC_TOKEN));
-#endif
     _http.addHeader("X-GitHub-Api-Version", "2022-11-28" );
     const char* get_headers[] = { "Content-Length", "Content-type", "Accept-Ranges" };
     _http.collectHeaders( get_headers, sizeof(get_headers)/sizeof(const char*) );
@@ -4962,10 +4945,6 @@ void WiFiSetup(void) {
     //FOTA.setExtraHTTPHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:21.0) Gecko/20100101 Firefox/21.0");
     FOTA.setExtraHTTPHeader("User-Agent", "SmartEVSE-v3");
     FOTA.setExtraHTTPHeader("Accept", "application/vnd.github+json");
-    //public token for dingo35 repo to have higher rate limiting; non expiring
-#if defined(GITHUB_PUBLIC_TOKEN) && (EXPAND(GITHUB_PUBLIC_TOKEN) != 1)
-    FOTA.setExtraHTTPHeader("Authorization", Bearify(GITHUB_PUBLIC_TOKEN));
-#endif
     FOTA.setExtraHTTPHeader("X-GitHub-Api-Version", "2022-11-28" );
     //FOTA.setRootCA( MyRootCA );
 
