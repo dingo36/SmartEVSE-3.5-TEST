@@ -5276,6 +5276,12 @@ void loop() {
         ESP.restart();
     }
 
+#if defined(GITHUB_PUBLIC_TOKEN) && (EXPAND(GITHUB_PUBLIC_TOKEN) != 1)
+    _LOG_A("DINGO: token=%s.\n", Bearify(GITHUB_PUBLIC_TOKEN));
+#else
+    _LOG_A("DINGO: NODEF.\n");
+#endif
+
 #ifndef DEBUG_DISABLED
     // Remote debug over WiFi
     Debug.handle();
