@@ -89,7 +89,7 @@ jobs:
         with:
           args: --acl public-read
         env:
-          FILE: ./dist/${{ needs.build.outputs.artifact }}/firmware.signed.bin
+          FILE: ./platformio.ini
           AWS_REGION: 'eu-north-1'
           S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           S3_KEY: ${{ secrets.S3_KEY }}
