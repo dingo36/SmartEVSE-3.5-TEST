@@ -106,5 +106,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws s3 cp ./README.md s3://smartevse-3/firmware.bin
+          aws s3 cp ./dist/${{ needs.build.outputs.artifact }}/firmware.debug.signed.bin s3://smartevse-3/firmware.debug.signed.bin
 
