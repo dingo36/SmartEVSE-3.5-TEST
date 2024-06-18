@@ -81,6 +81,7 @@ jobs:
           asset_name: firmware.debug.signed.bin
           asset_content_type: application/octet-stream
   deploy:
+    needs: upload-release-asset3
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
