@@ -82,7 +82,6 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           OWNER: ${{ github.event.repository_owner }}
         run: |
-          echo "$GITHUB_CONTEXT"
-          aws s3 cp ./dist/${{ needs.build.outputs.artifact }}/firmware.debug.signed.bin s3://smartevse-3/$OWNER_firmware.debug.signed.bin
-          aws s3 cp ./dist/${{ needs.build.outputs.artifact }}/firmware.signed.bin s3://smartevse-3/$OWNER_firmware.signed.bin
+          aws s3 cp ./dist/${{ needs.build.outputs.artifact }}/firmware.debug.signed.bin s3://smartevse-3/${{ env.OWNER }}_firmware.debug.signed.bin
+          aws s3 cp ./dist/${{ needs.build.outputs.artifact }}/firmware.signed.bin s3://smartevse-3/${{ env.OWNER }}_firmware.signed.bin
 
