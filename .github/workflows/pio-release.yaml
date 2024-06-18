@@ -87,7 +87,7 @@ jobs:
       - name: Upload file to bucket
         uses: zdurham/s3-upload-github-action@master
         with:
-          args: --acl public-read
+          args: --no-acl
         env:
           FILE: ./README.md
           AWS_REGION: 'eu-north-1'
