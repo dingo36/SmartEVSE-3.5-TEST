@@ -83,15 +83,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - name: Upload file to bucket
-        uses: zdurham/s3-upload-github-action@master
-        with:
-          args: --no-acl
+        uses: actions/checkout@v3
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install awscli --upgrade
+      - name: Configure AWS credentials
         env:
-          FILE: ./README.md
-          AWS_REGION: 'eu-north-1'
-          S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          S3_KEY: ${{ secrets.S3_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          run: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set default.region eu-west-2
+      - name: Upload file to S3
+        run: |
+          aws s3 cp ./README.md s3://smartevse-3/firmware.bin 
