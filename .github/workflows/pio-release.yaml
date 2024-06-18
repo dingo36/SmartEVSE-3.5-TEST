@@ -82,9 +82,9 @@ jobs:
           asset_content_type: application/octet-stream
   deploy:
     runs-on: ubuntu-latest
+    name: Upload file to bucket
+    uses: actions/checkout@v3
     steps:
-      - name: Upload file to bucket
-        uses: actions/checkout@v3
       - name: Install AWS CLI
         run: |
           sudo apt-get update
