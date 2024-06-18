@@ -80,12 +80,6 @@ jobs:
           asset_path: ./dist/${{ needs.build.outputs.artifact }}/firmware.debug.signed.bin
           asset_name: firmware.debug.signed.bin
           asset_content_type: application/octet-stream
-  deploy:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - name: Install AWS CLI
         run: |
